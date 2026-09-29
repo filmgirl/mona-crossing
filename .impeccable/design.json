@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-29T15:08:30.597Z",
+  "title": "Design System: Mona Crossing",
+  "extensions": {
+    "colorMeta": {
+      "cream": {
+        "role": "neutral",
+        "displayName": "Sidewalk Cream",
+        "tonalRamp": ["oklch(15% 0.0325 91.66)", "oklch(26% 0.0325 91.66)", "oklch(38% 0.0325 91.66)", "oklch(49% 0.0325 91.66)", "oklch(61% 0.0325 91.66)", "oklch(72% 0.0325 91.66)", "oklch(84% 0.0325 91.66)", "oklch(95% 0.0325 91.66)"]
+      },
+      "paper": {
+        "role": "neutral",
+        "displayName": "Warm Paper",
+        "tonalRamp": ["oklch(15% 0.0120 96.42)", "oklch(26% 0.0120 96.42)", "oklch(38% 0.0120 96.42)", "oklch(49% 0.0120 96.42)", "oklch(61% 0.0120 96.42)", "oklch(72% 0.0120 96.42)", "oklch(84% 0.0120 96.42)", "oklch(95% 0.0120 96.42)"]
+      },
+      "plum": {
+        "role": "neutral",
+        "displayName": "Graphite Plum",
+        "tonalRamp": ["oklch(15% 0.0232 295.65)", "oklch(26% 0.0232 295.65)", "oklch(38% 0.0232 295.65)", "oklch(49% 0.0232 295.65)", "oklch(61% 0.0232 295.65)", "oklch(72% 0.0232 295.65)", "oklch(84% 0.0232 295.65)", "oklch(95% 0.0232 295.65)"]
+      },
+      "plum-soft": {
+        "role": "neutral",
+        "displayName": "Soft Plum",
+        "tonalRamp": ["oklch(15% 0.0393 308.46)", "oklch(26% 0.0393 308.46)", "oklch(38% 0.0393 308.46)", "oklch(49% 0.0393 308.46)", "oklch(61% 0.0393 308.46)", "oklch(72% 0.0393 308.46)", "oklch(84% 0.0393 308.46)", "oklch(95% 0.0393 308.46)"]
+      },
+      "coral": {
+        "role": "primary",
+        "displayName": "Coral Peach",
+        "tonalRamp": ["oklch(15% 0.0881 34.55)", "oklch(26% 0.0881 34.55)", "oklch(38% 0.0881 34.55)", "oklch(49% 0.0881 34.55)", "oklch(61% 0.0881 34.55)", "oklch(72% 0.0881 34.55)", "oklch(84% 0.0881 34.55)", "oklch(95% 0.0881 34.55)"]
+      },
+      "pink": {
+        "role": "primary",
+        "displayName": "Candy Pink",
+        "tonalRamp": ["oklch(15% 0.0986 359.08)", "oklch(26% 0.0986 359.08)", "oklch(38% 0.0986 359.08)", "oklch(49% 0.0986 359.08)", "oklch(61% 0.0986 359.08)", "oklch(72% 0.0986 359.08)", "oklch(84% 0.0986 359.08)", "oklch(95% 0.0986 359.08)"]
+      },
+      "mint": {
+        "role": "secondary",
+        "displayName": "Garden Mint",
+        "tonalRamp": ["oklch(15% 0.0805 134.09)", "oklch(26% 0.0805 134.09)", "oklch(38% 0.0805 134.09)", "oklch(49% 0.0805 134.09)", "oklch(61% 0.0805 134.09)", "oklch(72% 0.0805 134.09)", "oklch(84% 0.0805 134.09)", "oklch(95% 0.0805 134.09)"]
+      },
+      "mint-edge": {
+        "role": "secondary",
+        "displayName": "Leaf Edge",
+        "tonalRamp": ["oklch(15% 0.0712 161.05)", "oklch(26% 0.0712 161.05)", "oklch(38% 0.0712 161.05)", "oklch(49% 0.0712 161.05)", "oklch(61% 0.0712 161.05)", "oklch(72% 0.0712 161.05)", "oklch(84% 0.0712 161.05)", "oklch(95% 0.0712 161.05)"]
+      },
+      "lavender": {
+        "role": "tertiary",
+        "displayName": "Neighborhood Lavender",
+        "tonalRamp": ["oklch(15% 0.0407 301.26)", "oklch(26% 0.0407 301.26)", "oklch(38% 0.0407 301.26)", "oklch(49% 0.0407 301.26)", "oklch(61% 0.0407 301.26)", "oklch(72% 0.0407 301.26)", "oklch(84% 0.0407 301.26)", "oklch(95% 0.0407 301.26)"]
+      },
+      "aqua": {
+        "role": "tertiary",
+        "displayName": "River Aqua",
+        "tonalRamp": ["oklch(15% 0.0703 202.71)", "oklch(26% 0.0703 202.71)", "oklch(38% 0.0703 202.71)", "oklch(49% 0.0703 202.71)", "oklch(61% 0.0703 202.71)", "oklch(72% 0.0703 202.71)", "oklch(84% 0.0703 202.71)", "oklch(95% 0.0703 202.71)"]
+      },
+      "focus": {
+        "role": "neutral",
+        "displayName": "Berry Focus",
+        "tonalRamp": ["oklch(15% 0.1473 353.95)", "oklch(26% 0.1473 353.95)", "oklch(38% 0.1473 353.95)", "oklch(49% 0.1473 353.95)", "oklch(61% 0.1473 353.95)", "oklch(72% 0.1473 353.95)", "oklch(84% 0.1473 353.95)", "oklch(95% 0.1473 353.95)"]
+      },
+      "grass": {
+        "role": "secondary",
+        "displayName": "Lime Grass",
+        "tonalRamp": ["oklch(15% 0.0895 140.46)", "oklch(26% 0.0895 140.46)", "oklch(38% 0.0895 140.46)", "oklch(49% 0.0895 140.46)", "oklch(61% 0.0895 140.46)", "oklch(72% 0.0895 140.46)", "oklch(84% 0.0895 140.46)", "oklch(95% 0.0895 140.46)"]
+      },
+      "dark-leaf": {
+        "role": "secondary",
+        "displayName": "Deep Leaf",
+        "tonalRamp": ["oklch(15% 0.0618 166.63)", "oklch(26% 0.0618 166.63)", "oklch(38% 0.0618 166.63)", "oklch(49% 0.0618 166.63)", "oklch(61% 0.0618 166.63)", "oklch(72% 0.0618 166.63)", "oklch(84% 0.0618 166.63)", "oklch(95% 0.0618 166.63)"]
+      },
+      "purple": {
+        "role": "tertiary",
+        "displayName": "Pixel Purple",
+        "tonalRamp": ["oklch(15% 0.0786 306.74)", "oklch(26% 0.0786 306.74)", "oklch(38% 0.0786 306.74)", "oklch(49% 0.0786 306.74)", "oklch(61% 0.0786 306.74)", "oklch(72% 0.0786 306.74)", "oklch(84% 0.0786 306.74)", "oklch(95% 0.0786 306.74)"]
+      },
+      "deep-water": {
+        "role": "tertiary",
+        "displayName": "Deep River",
+        "tonalRamp": ["oklch(15% 0.0768 214.23)", "oklch(26% 0.0768 214.23)", "oklch(38% 0.0768 214.23)", "oklch(49% 0.0768 214.23)", "oklch(61% 0.0768 214.23)", "oklch(72% 0.0768 214.23)", "oklch(84% 0.0768 214.23)", "oklch(95% 0.0768 214.23)"]
+      },
+      "wood": {
+        "role": "tertiary",
+        "displayName": "Rose Wood",
+        "tonalRamp": ["oklch(15% 0.0610 22.30)", "oklch(26% 0.0610 22.30)", "oklch(38% 0.0610 22.30)", "oklch(49% 0.0610 22.30)", "oklch(61% 0.0610 22.30)", "oklch(72% 0.0610 22.30)", "oklch(84% 0.0610 22.30)", "oklch(95% 0.0610 22.30)"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Pixel Title", "purpose": "Fluid game title; 18px on narrow screens and 16px on the smallest." },
+      "headline": { "displayName": "Pixel State Heading", "purpose": "Overlay headings; 15px on narrow screens." },
+      "body": { "displayName": "Readable Explanation", "purpose": "Overlay copy and help prose; help is limited to 72ch." },
+      "control": { "displayName": "Pixel Control", "purpose": "Standard action buttons and help summary." },
+      "label": { "displayName": "Pixel Label", "purpose": "HUD labels and keyboard hints; HUD labels become 9px on narrow screens." },
+      "score": { "displayName": "Status Numeral", "purpose": "HUD output with tabular numerals; 13px on narrow screens." }
+    },
+    "shadows": [
+      { "name": "control-ledge", "value": "0 3px 0 var(--plum)", "purpose": "Hard resting button ledge." },
+      { "name": "pressed-ledge", "value": "0 1px 0 var(--plum)", "purpose": "Hard ledge while a button is active." },
+      { "name": "overlay-offset", "value": "6px 6px 0 var(--shadow)", "purpose": "Unblurred paper-panel offset; existing --shadow is #34313e26." }
+    ],
+    "motion": [
+      { "name": "button-press", "value": "translateY(2px)", "purpose": "Immediate active-button displacement, removed under prefers-reduced-motion; no transition duration or easing is defined." },
+      { "name": "event-burst-duration", "value": "0.65s", "purpose": "Renderer goal, death and round ornament window; disabled with reduced motion." }
+    ],
+    "breakpoints": [
+      { "name": "short-desktop", "value": "(min-width: 900px) and (max-height: 850px)" },
+      { "name": "narrow", "value": "(max-width: 540px)" },
+      { "name": "smallest", "value": "(max-width: 350px)" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Standard Arcade Button",
+      "kind": "button",
+      "refersTo": "button",
+      "description": "Paper action key used for pause and restart.",
+      "html": "<button class=\"ds-button\" type=\"button\">Restart</button>",
+      "css": ".ds-button { min-height: 44px; padding: 9px 14px; border: 2px solid var(--plum); border-radius: 3px; color: var(--plum); background: var(--paper); font: 400 12px 'Silkscreen', 'Courier New', monospace; box-shadow: 0 3px 0 var(--plum); cursor: pointer; touch-action: manipulation; } .ds-button:hover { background: var(--lavender); } .ds-button:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--plum); } .ds-button:disabled { opacity: .55; cursor: not-allowed; } @media (prefers-reduced-motion: reduce) { .ds-button:active { transform: none; } }"
+    },
+    {
+      "name": "Coral Start Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Wider coral action for starting a crossing.",
+      "html": "<button class=\"ds-primary\" type=\"button\">Start crossing</button>",
+      "css": ".ds-primary { min-height: 44px; padding: 9px 22px; border: 2px solid var(--plum); border-radius: 3px; color: var(--plum); background: var(--coral); font: 400 14px 'Silkscreen', 'Courier New', monospace; box-shadow: 0 3px 0 var(--plum); cursor: pointer; touch-action: manipulation; } .ds-primary:hover { background: var(--lavender); } .ds-primary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-primary:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--plum); } .ds-primary:disabled { opacity: .55; cursor: not-allowed; } @media (max-width: 540px) { .ds-primary { min-height: 40px; font-size: 12px; } } @media (prefers-reduced-motion: reduce) { .ds-primary:active { transform: none; } }"
+    },
+    {
+      "name": "Mint Sound Button",
+      "kind": "button",
+      "refersTo": "button-sound",
+      "description": "Mint, nonwrapping sound toggle with the shared press and focus states.",
+      "html": "<button class=\"ds-sound\" type=\"button\" aria-pressed=\"false\">Sound: off</button>",
+      "css": ".ds-sound { min-height: 44px; padding: 9px 14px; border: 2px solid var(--plum); border-radius: 3px; color: var(--plum); background: var(--mint); font: 400 12px 'Silkscreen', 'Courier New', monospace; box-shadow: 0 3px 0 var(--plum); cursor: pointer; touch-action: manipulation; white-space: nowrap; } .ds-sound:hover { background: var(--mint); } .ds-sound:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-sound:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--plum); } .ds-sound:disabled { opacity: .55; cursor: not-allowed; } @media (max-width: 540px) { .ds-sound { font-size: 10px; padding: 6px 8px; } } @media (prefers-reduced-motion: reduce) { .ds-sound:active { transform: none; } }"
+    },
+    {
+      "name": "Lavender Direction Key",
+      "kind": "button",
+      "refersTo": "button-direction",
+      "description": "Single touch movement key; its lavender fill remains stable on hover.",
+      "html": "<button class=\"ds-direction\" type=\"button\" aria-label=\"Hop up\">▲</button>",
+      "css": ".ds-direction { width: 44px; min-height: 36px; padding: 0; border: 2px solid var(--plum); border-radius: 3px; color: var(--plum); background: var(--lavender); font: 18px system-ui, sans-serif; box-shadow: 0 3px 0 var(--plum); cursor: pointer; user-select: none; touch-action: none; } .ds-direction:hover { background: var(--lavender); } .ds-direction:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-direction:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--plum); } .ds-direction:disabled { opacity: .55; cursor: not-allowed; } @media (max-width: 540px) { .ds-direction { min-height: 44px; } } @media (prefers-reduced-motion: reduce) { .ds-direction:active { transform: none; } }"
+    },
+    {
+      "name": "Movement Navigation",
+      "kind": "nav",
+      "description": "Three-by-three cross-shaped movement pad with four named directions.",
+      "html": "<nav class=\"ds-pad\" aria-label=\"Movement controls\"><button class=\"ds-pad-up\" type=\"button\" aria-label=\"Hop up\">▲</button><button class=\"ds-pad-left\" type=\"button\" aria-label=\"Hop left\">◀</button><span class=\"ds-pad-center\" aria-hidden=\"true\">+</span><button class=\"ds-pad-right\" type=\"button\" aria-label=\"Hop right\">▶</button><button class=\"ds-pad-down\" type=\"button\" aria-label=\"Hop down\">▼</button></nav>",
+      "css": ".ds-pad { display: grid; grid-template-columns: repeat(3, 44px); grid-template-rows: repeat(3, 36px); gap: 3px; } .ds-pad button { padding: 0; min-height: 36px; border: 2px solid var(--plum); border-radius: 3px; color: var(--plum); background: var(--lavender); font: 18px system-ui, sans-serif; box-shadow: 0 3px 0 var(--plum); cursor: pointer; user-select: none; touch-action: none; } .ds-pad button:hover { background: var(--lavender); } .ds-pad button:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-pad button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--plum); } .ds-pad-up { grid-area: 1 / 2; } .ds-pad-left { grid-area: 2 / 1; } .ds-pad-right { grid-area: 2 / 3; } .ds-pad-down { grid-area: 3 / 2; } .ds-pad-center { grid-area: 2 / 2; display: grid; place-items: center; color: var(--plum-soft); font: 400 22px 'Silkscreen', 'Courier New', monospace; } @media (max-width: 540px) { .ds-pad { grid-template-rows: repeat(3, 44px); } .ds-pad button { min-height: 44px; } } @media (prefers-reduced-motion: reduce) { .ds-pad button:active { transform: none; } }"
+    },
+    {
+      "name": "Status Strip",
+      "kind": "card",
+      "refersTo": "hud",
+      "description": "Five paper status cells; the open bottom edge joins the framed playfield.",
+      "html": "<section class=\"ds-hud\" aria-label=\"Game status\"><div><span class=\"ds-hud-label\">Score</span><output>00000</output></div><div><span class=\"ds-hud-label\">Best</span><output>00000</output></div><div><span class=\"ds-hud-label\">Hearts</span><output class=\"ds-hud-hearts\" aria-label=\"3 hearts\">3 / 3</output></div><div><span class=\"ds-hud-label\">Time</span><output>40</output></div><div><span class=\"ds-hud-label\">Round</span><output>01</output></div></section>",
+      "css": ".ds-hud { display: grid; grid-template-columns: repeat(5, 1fr); background: var(--paper); color: var(--plum); border: 2px solid var(--plum); border-bottom: 0; padding: 12px 8px; gap: 5px; text-align: center; font-family: 'Silkscreen', 'Courier New', monospace; font-weight: 400; } .ds-hud-label { display: block; font-size: 10px; color: var(--plum-soft); margin-bottom: 5px; } .ds-hud output { font-size: 18px; font-variant-numeric: tabular-nums; } .ds-hud .ds-hud-hearts { color: var(--focus); } @media (max-width: 540px) { .ds-hud { padding: 9px 3px; gap: 1px; } .ds-hud output { font-size: 13px; } .ds-hud-label { font-size: 9px; } }"
+    },
+    {
+      "name": "Paper State Overlay",
+      "kind": "custom",
+      "refersTo": "overlay",
+      "description": "Octocat state sign; preview shows its contents without the playfield's positioning context.",
+      "html": "<section class=\"ds-overlay\" aria-label=\"Welcome to the neighborhood\"><svg class=\"ds-overlay-mona\" width=\"54\" height=\"54\" viewBox=\"-2 0 30 30\" aria-hidden=\"true\"><path class=\"ds-overlay-ink\" d=\"M3 0h4v2h14V0h4v8h2v9h-2v3h-7v4h2v3h2v2h-4v-2h-2v-6h-2v8h-3v-8H9v6H7v2H4v-2h2v-4H1v-2h-3v-4h3v2h5v-2H2v-3H0V8h3Z\"/><path class=\"ds-overlay-face\" d=\"M5 8h17v2h2v6h-2v2H5v-2H3v-6h2Z\"/><path class=\"ds-overlay-ink\" d=\"M7 11h2v4H7zM18 11h2v4h-2zM12 15h3v1h-3z\"/></svg><h2>Welcome to the neighborhood!</h2><p>Dodge the bugs. Ride the commits.<br>Get Mona to all five main gardens.</p><button class=\"ds-overlay-start\" type=\"button\">Start crossing</button><p class=\"ds-overlay-hint\">Arrows / WASD or the touch pad</p></section>",
+      "css": ".ds-overlay { width: min(88%, 400px); padding: 20px; text-align: center; border: 3px solid var(--plum); background: var(--paper); color: var(--plum); box-shadow: 6px 6px 0 var(--shadow); } .ds-overlay-mona { margin-bottom: 8px; shape-rendering: crispEdges; } .ds-overlay-ink { fill: var(--plum); } .ds-overlay-face { fill: var(--paper); } .ds-overlay h2 { font: 400 20px/1.35 'Silkscreen', 'Courier New', monospace; margin: 0 0 12px; } .ds-overlay p { font: 15px/1.6 system-ui, sans-serif; margin: 0 0 14px; } .ds-overlay .ds-overlay-hint { font-size: 12px; margin: 14px 0 0; } .ds-overlay-start { min-height: 44px; padding: 9px 22px; border: 2px solid var(--plum); border-radius: 3px; color: var(--plum); background: var(--coral); font: 400 14px 'Silkscreen', 'Courier New', monospace; box-shadow: 0 3px 0 var(--plum); cursor: pointer; touch-action: manipulation; } .ds-overlay-start:hover { background: var(--lavender); } .ds-overlay-start:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-overlay-start:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--plum); } @media (max-width: 540px) { .ds-overlay { padding: 12px; } .ds-overlay-mona { display: none; } .ds-overlay h2 { font-size: 15px; margin-bottom: 6px; } .ds-overlay p { font-size: 12px; margin-bottom: 8px; line-height: 1.5; } .ds-overlay .ds-overlay-hint { margin-top: 8px; font-size: 10px; } .ds-overlay-start { min-height: 40px; font-size: 12px; } } @media (prefers-reduced-motion: reduce) { .ds-overlay-start:active { transform: none; } }"
+    },
+    {
+      "name": "Help Disclosure",
+      "kind": "custom",
+      "description": "Native help disclosure with pixel summary and readable body copy.",
+      "html": "<details class=\"ds-help\"><summary>How to cross</summary><div class=\"ds-help-body\"><p><strong>Arrows / WASD</strong> hop one tile. On touch, tap the pad. <strong>P / Escape</strong> pauses; <strong>M</strong> toggles sound. Click or tap the playfield to focus it inside a cabinet.</p></div></details>",
+      "css": ".ds-help { border-top: 2px solid var(--mint-edge); margin-top: 4px; color: var(--plum); } .ds-help summary { cursor: pointer; padding: 14px 0; font: 400 12px 'Silkscreen', 'Courier New', monospace; } .ds-help summary:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; } .ds-help-body { font: 15px/1.6 system-ui, sans-serif; max-width: 72ch; padding: 0 0 10px; } .ds-help-body p { margin-top: 0; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Candy-Pastel Commit Neighborhood",
+    "overview": "An original pixel town combines cream sidewalks, coral and pink roads, mint gardens, an aqua river and lavender neighborhood details. Graphite-plum outlines give the sweet palette a clear, sturdy edge. The cabinet-approved pixel Octocat silhouette and locally hosted Silkscreen are binding identity assets, not interchangeable decoration.\n\nThe interface is compact and tactile: small pixel labels, readable supporting prose, hard-edged frames and pressable controls. Illustrated houses, trees, benches and Git-themed signs belong to the world; the surrounding interface supports play rather than competing with it. This documents the current implementation in `index.html`, `styles.css` and `src/renderer.js`, not a proposed replacement.",
+    "keyCharacteristics": [
+      "Original candy-pastel pixel scenery with graphite-plum definition.",
+      "Local Silkscreen identity paired with system-ui explanatory text.",
+      "Square playfield frames and subtly rounded, hard-shadowed controls.",
+      "Compact status displays and reachable keyboard/touch actions.",
+      "Visible focus and reduced ornamental motion without removing gameplay."
+    ],
+    "rules": [
+      {
+        "name": "The Terrain Color Rule",
+        "body": "Preserve the implemented distinction between warm roads, aqua water and cream/mint safe ground; graphite-plum outlines keep their boundaries explicit.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Voices Rule",
+        "body": "Use local Silkscreen for identity, short controls and status; keep explanatory prose and feedback in the implemented system-ui voice.",
+        "section": "typography"
+      },
+      {
+        "name": "The Pixel Depth Rule",
+        "body": "Use hard offsets and tonal pixel layering for depth; do not replace the implemented ledges with soft atmospheric shadows.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** preserve terrain color meaning and graphite-plum boundaries.",
+      "**Do** use the local Silkscreen face and approved pixel Octocat silhouette.",
+      "**Do** pair pixel labels with system-ui explanations.",
+      "**Do** keep keyboard focus visible and movement controls reachable when the layout tightens.",
+      "**Do** use hard control ledges and respect reduced ornamental motion."
+    ],
+    "donts": [
+      "**Don't** replace the original pixel town with copied maps or reference-image assets.",
+      "**Don't** substitute a generic mascot or remotely fetched typeface for the inherited identity.",
+      "**Don't** blur pixel art or exchange hard ledges for diffuse shadows.",
+      "**Don't** treat the sidecar's synthesized tonal strips as new approved tokens.",
+      "**Don't** infer inputs, chips, easing curves or a global layout template that the build does not establish."
+    ]
+  }
+}

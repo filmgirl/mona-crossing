@@ -5,6 +5,7 @@ import { createAudio } from "./audio.js";
 
 const $ = id => document.getElementById(id);
 const canvas = $("game");
+$("arcade-link").hidden = window.self !== window.top;
 const noticeMessages = new Set();
 function report(message) {
   noticeMessages.add(message);

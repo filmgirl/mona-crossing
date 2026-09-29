@@ -22,6 +22,14 @@ test("all entry references exist and remain relative", async () => {
   const png = await readFile(new URL("../assets/mona-crossing-gameplay.png", import.meta.url));
   assert.equal(png.subarray(1, 4).toString(), "PNG");
 });
+test("standalone and repository arcade links preserve play and credits links", async () => {
+  const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
+  const readme = await readFile(new URL("../README.md", import.meta.url), "utf8");
+  assert.match(html, /<a id="arcade-link" href="https:\/\/filmgirl\.github\.io\/arcade\/" hidden>GitHub Arcade<\/a>/);
+  assert.match(html, /<a href="https:\/\/github\.com\/filmgirl\/mona-crossing">Source &amp; credits<\/a>/);
+  assert.match(readme, /\*\*Play:\*\* https:\/\/filmgirl\.github\.io\/mona-crossing\//);
+  assert.match(readme, /\[GitHub Arcade\]\(https:\/\/filmgirl\.github\.io\/arcade\/\)/);
+});
 test("storage validates saves and reports denial without interrupting play", t => {
   const warnings = [];
   t.mock.method(console, "warn", (...args) => warnings.push(args));

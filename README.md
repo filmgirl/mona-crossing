@@ -8,6 +8,8 @@ pull-request ferries, then deliver Mona to five `main` gardens.
 
 **Play:** https://filmgirl.github.io/mona-crossing/
 
+**More games:** [GitHub Arcade](https://filmgirl.github.io/arcade/)
+
 ## Controls
 
 | Input | Action |
@@ -78,6 +80,8 @@ small focus-mode viewports can scroll to the controls.
 The game works with the cabinet's `allow-scripts allow-same-origin
 allow-pointer-lock` sandbox. It requires no popups, top navigation, fullscreen or
 parent messaging. Pause, audio and local storage belong to this game.
+The standalone footer links to GitHub Arcade in the same tab; only that link is
+hidden when embedded, avoiding a cabinet inside the cabinet.
 
 Artwork:
 

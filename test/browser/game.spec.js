@@ -162,15 +162,18 @@ test("phone touch play at 390 and 320; landscape, help and menu keys stay usable
 });
 
 test("cabinet sandbox focuses inputs; denied saves and audio are nonfatal", async ({ page }) => {
-  await page.goto("./");
-  await page.setContent('<iframe title="Mona Crossing" style="width:800px;height:1000px" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allow="fullscreen; gamepad"></iframe>');
+  await page.goto("./styles.css");
+  await page.setContent('<iframe title="Mona Crossing" style="width:800px;height:1100px" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allow="fullscreen; gamepad"></iframe>');
   await page.locator("iframe").evaluate((frame, url) => { frame.src = url; }, test.info().project.use.baseURL);
   const game = page.frameLocator("iframe");
+  await expect(game.getByRole("link", { name: "GitHub Arcade", includeHidden: true })).toBeHidden();
+  await expect(game.getByRole("link", { name: "Source & credits" })).toBeVisible();
   await game.getByRole("button", { name: "Start crossing" }).click();
   await expect(game.locator("#game")).toBeFocused();
   await page.keyboard.press("ArrowLeft");
   await page.keyboard.press("p");
   await expect(game.getByRole("button", { name: "Resume crossing" })).toBeVisible();
+  await capture(page, "arcade-cabinet-desktop.png");
   await page.goto("./");
   await page.addInitScript(() => {
     Object.defineProperty(window, "localStorage", { get() { throw new Error("Test denied storage"); } });
@@ -183,4 +186,61 @@ test("cabinet sandbox focuses inputs; denied saves and audio are nonfatal", asyn
   await expect(page.locator("#notice")).toContainText("Sound could not start");
   await page.locator("#start").click();
   await expect(page.locator("#overlay")).toBeHidden();
+});
+
+test("standalone arcade link is focusable without starting or resuming play", async ({ page }) => {
+  await open(page);
+  const arcade = page.getByRole("link", { name: "GitHub Arcade", exact: true });
+  await expect(arcade).toBeVisible();
+  await expect(arcade).toHaveAttribute("href", "https://filmgirl.github.io/arcade/");
+  expect(await arcade.getAttribute("target")).toBeNull();
+  await page.getByRole("link", { name: "Source & credits" }).focus();
+  await page.keyboard.press("Tab");
+  await expect(arcade).toBeFocused();
+  const ready = await snapshot(page);
+  for (const key of ["ArrowUp", "w", "p", "m", " "]) await page.keyboard.press(key);
+  expect(await snapshot(page)).toEqual(ready);
+  await expect(page.locator("#sound")).toHaveText("Sound: off");
+  await capture(page, "arcade-desktop-focus.png");
+  await page.locator("#start").click();
+  await page.locator("#pause").click();
+  await arcade.focus();
+  await page.keyboard.press("p");
+  expect((await snapshot(page)).status).toBe("paused");
+});
+
+test("arcade footer and cabinet controls fit 390 and 320 touch viewports", async ({ browser }) => {
+  for (const width of [390, 320]) {
+    const context = await browser.newContext({ viewport: { width, height: 850 }, hasTouch: true, isMobile: true });
+    const page = await context.newPage();
+    await open(page);
+    const arcade = page.getByRole("link", { name: "GitHub Arcade", exact: true });
+    await expect(arcade).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await capture(page, `arcade-mobile-${width}.png`);
+    await page.goto("./styles.css");
+    await page.setContent('<meta name="viewport" content="width=device-width, initial-scale=1"><style>body{margin:0}iframe{display:block;width:100%;height:850px;border:0}</style><iframe title="Mona Crossing" sandbox="allow-scripts allow-same-origin allow-pointer-lock" allow="fullscreen; gamepad"></iframe>');
+    await page.locator("iframe").evaluate((frame, url) => { frame.src = url; }, test.info().project.use.baseURL);
+    const game = page.frameLocator("iframe");
+    await expect(game.locator("#arcade-link")).toBeHidden();
+    await expect(game.getByRole("link", { name: "Source & credits" })).toBeVisible();
+    await game.locator("#start").tap();
+    const frame = page.frames().find(frame => frame.parentFrame());
+    expect(await frame.evaluate(() => ({ width: innerWidth, height: innerHeight }))).toEqual({ width, height: 850 });
+    const before = await snapshot(frame);
+    await game.getByRole("button", { name: "Hop left" }).tap();
+    await page.clock.runFor(160);
+    expect((await snapshot(frame)).player.x).toBe(before.player.x - 32);
+    await game.locator("#pause").tap();
+    expect((await snapshot(frame)).status).toBe("paused");
+    await game.locator("#sound").tap();
+    await expect(game.locator("#sound")).toHaveText("Sound: on");
+    await game.locator("#sound").tap();
+    await game.getByText("How to cross", { exact: true }).tap();
+    await expect(game.locator(".instructions-body")).toBeVisible();
+    expect(await frame.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await game.getByRole("link", { name: "Source & credits" }).scrollIntoViewIfNeeded();
+    await capture(page, `arcade-cabinet-${width}-help.png`);
+    await context.close();
+  }
 });

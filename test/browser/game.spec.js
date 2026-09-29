@@ -7,11 +7,12 @@ const snapshot = page => page.evaluate(async () => {
   return getGameSnapshot();
 });
 const keyFor = { up: "ArrowUp", down: "ArrowDown", left: "ArrowLeft", right: "ArrowRight" };
+const CLOCK_START = Date.UTC(2026, 0, 1);
 async function open(page) {
-  await page.clock.install();
+  await page.clock.install({ time: CLOCK_START });
+  await page.clock.pauseAt(CLOCK_START + 2000);
   await page.goto("./");
   await page.evaluate(() => document.fonts.ready);
-  await page.clock.pauseAt(new Date());
 }
 async function step(page, direction, ms = 160) {
   if (direction !== "wait") await page.keyboard.press(keyFor[direction]);
@@ -119,10 +120,10 @@ test("real failures give useful game over and instant replay; blur pauses", asyn
 test("phone touch play at 390 and 320; landscape, help and menu keys stay usable", async ({ browser }) => {
   const context = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true });
   const page = await context.newPage();
-  await page.clock.install();
+  await page.clock.install({ time: CLOCK_START });
+  await page.clock.pauseAt(CLOCK_START + 2000);
   await page.goto(process.env.GAME_URL || "http://127.0.0.1:4177/mona-crossing/");
   await page.evaluate(() => document.fonts.ready);
-  await page.clock.pauseAt(new Date());
   await capture(page, "mobile-start.png");
   await page.locator("#start").tap();
   await page.clock.runFor(32);

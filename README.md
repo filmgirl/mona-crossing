@@ -33,6 +33,9 @@ lost hearts. New forward ground earns ten points once per crossing, each
 delivery earns 100 plus five per remaining second, and all five earn 500.
 Rounds gradually increase entity speeds, capped after round seven. Platform
 lengths, traffic gaps, a safe spawn and safe waiting rows remain unchanged.
+River logs and ferries have broad, visibly drawn decks with one-tile water gaps.
+Keep Mona's feet on a deck; river carry preserves her horizontal position between
+lanes, and her center can land anywhere inside an empty garden's visible tile.
 
 ## Development
 
@@ -57,6 +60,14 @@ npm run test:browser       # local Google Chrome
 The browser suite uses real keyboard and emulated touch events, including a
 complete five-garden round. Its route planner only reads cloned snapshots;
 it never inserts goals, moves Mona programmatically or changes game state.
+Those clock-controlled routes prove reachability, not human timing. River
+regressions also check deck-edge carry, visible garden boundaries, and a minimum
+44-pixel shared landing interval at the worst adjacent-platform alignment
+(over 460 ms of relative travel even at the round-seven speed cap).
+`test/browser/river.spec.js` additionally completes a round on the real browser
+clock with WASD decisions spaced 360–520 ms apart. It observes current geometry
+without searching future routes or modifying game state; it is automated
+human-paced coverage, not a substitute for a user's playtest.
 
 `PORT=4180 npm start` chooses another port. The preview binds to loopback.
 Use an HTTP server, not `file://`, for ES modules. Relative assets work at the

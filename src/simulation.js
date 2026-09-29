@@ -7,11 +7,12 @@ export const DEADLINE = 40;
 export const HOP_COOLDOWN = 0.14;
 export const STEP = 1 / 120;
 export const PLAYER_HALF = 10;
+const SUPPORT_EPSILON = 1e-7;
 
 const laneSpecs = [
-  { row: 1, kind: "log", speed: 28, length: 100, gap: 53, offset: 4 },
-  { row: 2, kind: "ferry", speed: -34, length: 108, gap: 56, offset: 24 },
-  { row: 3, kind: "log", speed: 26, length: 104, gap: 50, offset: 14 },
+  { row: 1, kind: "log", speed: 28, length: 160, gap: 32, offset: 4 },
+  { row: 2, kind: "ferry", speed: -34, length: 176, gap: 32, offset: 24 },
+  { row: 3, kind: "log", speed: 26, length: 160, gap: 32, offset: 14 },
   { row: 5, kind: "bug", speed: -43, length: 40, gap: 105, offset: 25 },
   { row: 6, kind: "conflict", speed: 39, length: 59, gap: 125, offset: 65 },
   { row: 8, kind: "bug", speed: -45, length: 42, gap: 123, offset: 5 },
@@ -76,8 +77,10 @@ export function segments(lane) {
 }
 
 export function platformAt(lane, x) {
+  // Carry and wrapped phase accumulate rounding independently at deck edges.
   return segments(lane).find(segment =>
-    x - PLAYER_HALF >= segment.x && x + PLAYER_HALF <= segment.x + segment.width
+    x - PLAYER_HALF >= segment.x - SUPPORT_EPSILON &&
+    x + PLAYER_HALF <= segment.x + segment.width + SUPPORT_EPSILON
   );
 }
 
@@ -124,7 +127,7 @@ export function hop(game, direction) {
   game.cooldown = HOP_COOLDOWN;
   game.events.push({ type: "hop" });
   if (row === 0) {
-    const goalIndex = GOALS.findIndex(col => Math.abs(x - (col + 0.5) * CELL) <= 12);
+    const goalIndex = GOALS.indexOf(Math.floor(x / CELL));
     if (goalIndex < 0 || game.goals[goalIndex]) {
       fail(game, goalIndex < 0 ? "garden" : "occupied");
       return true;

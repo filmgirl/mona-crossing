@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   createGame, restart, start, togglePause, advance, hop, segments,
-  platformAt, GOALS, WIDTH, DEADLINE, HOP_COOLDOWN, STEP, drainEvents
+  platformAt, GOALS, WIDTH, DEADLINE, HOP_COOLDOWN, STEP, PLAYER_HALF, CELL, drainEvents
 } from "../src/simulation.js";
 import { planRoute } from "./helpers/route.js";
 
@@ -101,6 +101,52 @@ test("logs carry Mona with their exact displacement", () => {
   assert.equal(game.lives, 3);
   assert.ok(Math.abs(game.player.x - (x + lane.speed * .5)) < 1e-6);
 });
+test("edge-case setup: both supported deck edges survive carry and phase wrapping", () => {
+  for (const row of [1, 2, 3]) {
+    for (const edge of ["left", "right"]) {
+      const game = playing();
+      const lane = game.lanes.find(lane => lane.row === row);
+      lane.phase = lane.speed < 0 ? .05 : lane.period - .05;
+      const segment = segments(lane).find(segment => segment.x >= 64 && segment.x + segment.width < WIDTH);
+      const x = edge === "left" ? segment.x + PLAYER_HALF : segment.x + segment.width - PLAYER_HALF;
+      place(game, row, x);
+      run(game, .6);
+      assert.equal(game.lives, 3, `row ${row}, ${edge} edge`);
+      assert.ok(Math.abs(game.player.x - x - lane.speed * .6) < 1e-7);
+      assert.ok(platformAt(lane, game.player.x));
+      const support = platformAt(lane, game.player.x);
+      assert.equal(platformAt(lane, support.x + PLAYER_HALF - .001), undefined);
+      assert.equal(platformAt(lane, support.x + support.width - PLAYER_HALF + .001), undefined);
+    }
+  }
+});
+test("river decks leave useful transfer windows at every relative alignment, including the speed cap", () => {
+  const game = playing();
+  game.round = 6;
+  GOALS.forEach((_, i) => deliver(game, i));
+  const river = game.lanes.filter(lane => lane.row <= 3);
+  for (let i = 0; i < river.length - 1; i++) {
+    const a = river[i];
+    const b = river[i + 1];
+    // Even a destination gap centered on the source leaves one contiguous
+    // shared landing interval this wide (Mona's entire support footprint fits).
+    const overlap = (Math.min(a.length, b.length) - 2 * PLAYER_HALF -
+      (Math.max(a.gap, b.gap) + 2 * PLAYER_HALF)) / 2;
+    assert.ok(overlap >= 44);
+    assert.ok(overlap / (Math.abs(a.speed) + Math.abs(b.speed)) >= .46);
+    assert.ok(a.gap >= CELL && b.gap >= CELL, "water remains a real hazard");
+    for (const [source, destination] of [[a, b], [b, a]]) {
+      const left = 80 + PLAYER_HALF;
+      const right = 80 + source.length - PLAYER_HALF;
+      for (let phase = 0; phase < destination.period; phase += .5) {
+        const shared = segments({ ...destination, phase }).map(segment =>
+          Math.max(0, Math.min(right, segment.x + segment.width - PLAYER_HALF) -
+            Math.max(left, segment.x + PLAYER_HALF)));
+        assert.ok(Math.max(...shared) >= 44, `rows ${source.row}/${destination.row}, phase ${phase}`);
+      }
+    }
+  }
+});
 test("negative ferries carry; wrapping is periodic and gap-free at seam", () => {
   const game = playing();
   const lane = game.lanes.find(lane => lane.row === 2);
@@ -166,6 +212,23 @@ test("closed garden gaps fail without reward", () => {
   hop(game, "up");
   assert.equal(game.lives, 2);
   assert.equal(game.score, 0);
+});
+test("edge-case setup: carried off-grid landings use the whole visible garden, not a hidden inset", () => {
+  for (const col of GOALS) {
+    for (const offset of [-15.9, -13, 13, 15.9]) {
+      const game = playing();
+      place(game, 1, (col + .5) * CELL + offset);
+      hop(game, "up");
+      assert.equal(game.lives, 3);
+      assert.equal(game.goals[GOALS.indexOf(col)], true);
+    }
+    for (const x of [col * CELL - .01, (col + 1) * CELL]) {
+      const game = playing();
+      place(game, 1, x);
+      hop(game, "up");
+      assert.equal(game.lives, 2, "hedges outside the visible tile remain unsafe");
+    }
+  }
 });
 test("five unique goals complete a round, reset slots and cap speeds", () => {
   const game = playing();

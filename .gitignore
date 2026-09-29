@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.DS_Store
+test-results/
+playwright-report/
+.impeccable/
+!.impeccable/
+.impeccable/*
+!.impeccable/design.json
+.playwright-cli/

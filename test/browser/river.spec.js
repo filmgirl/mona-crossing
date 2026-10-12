@@ -16,6 +16,24 @@ function safe(game, row, x, margin = 12) {
     x - PLAYER_HALF - margin < segment.x + segment.width + Math.max(0, lane.speed * .65) - 3);
 }
 
+test("ordinary Up presses cross the river and enter a garden without reading game state", async ({ page }) => {
+  await page.goto("./");
+  for (const riverDelay of [650, 800, 950]) {
+    await page.locator("#restart").click();
+    // Cross the unchanged road, then take time to look between river hops.
+    for (const delay of [2000, 1800, 450, 1400, 1400, 450]) {
+      await page.waitForTimeout(delay);
+      await page.keyboard.press("ArrowUp");
+    }
+    for (let hop = 0; hop < 4; hop++) {
+      await page.waitForTimeout(riverDelay);
+      await page.keyboard.press("ArrowUp");
+      await expect(page.locator("#hearts")).toHaveText("3 / 3");
+    }
+    await expect(page.locator("#feedback")).toContainText("Garden 3 delivered!");
+  }
+});
+
 test("real-clock WASD delivers five gardens with human-paced river decisions", async ({ page }) => {
   await page.goto("./");
   await page.locator("#start").click();

@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   createGame, restart, start, togglePause, advance, hop, segments,
-  platformAt, GOALS, WIDTH, DEADLINE, HOP_COOLDOWN, STEP, PLAYER_HALF, CELL, drainEvents
+  platformAt, GOALS, GOAL_WIDTH, WIDTH, DEADLINE, HOP_COOLDOWN, STEP, PLAYER_HALF, CELL, drainEvents
 } from "../src/simulation.js";
 import { planRoute } from "./helpers/route.js";
 
@@ -133,7 +133,7 @@ test("river decks leave useful transfer windows at every relative alignment, inc
     const overlap = (Math.min(a.length, b.length) - 2 * PLAYER_HALF -
       (Math.max(a.gap, b.gap) + 2 * PLAYER_HALF)) / 2;
     assert.ok(overlap >= 76);
-    assert.ok(overlap / (Math.abs(a.speed) + Math.abs(b.speed)) >= .8);
+    assert.ok(overlap / (Math.abs(a.speed) + Math.abs(b.speed)) >= 1.6);
     assert.ok(a.gap >= CELL && b.gap >= CELL, "water remains a real hazard");
     for (const [source, destination] of [[a, b], [b, a]]) {
       const left = 80 + PLAYER_HALF;
@@ -154,7 +154,7 @@ test("negative ferries carry; wrapping is periodic and gap-free at seam", () => 
   place(game, 2, 45);
   run(game, .2);
   assert.equal(game.lives, 3);
-  assert.ok(Math.abs(game.player.x - 38.2) < 1e-6);
+  assert.ok(Math.abs(game.player.x - (45 + lane.speed * .2)) < 1e-6);
   assert.ok(lane.phase >= 0 && lane.phase < lane.period);
   assert.ok(platformAt(lane, game.player.x));
   assert.deepEqual(segments({ ...lane, phase: lane.phase + lane.period }), segments(lane));
@@ -163,7 +163,7 @@ test("platform carrier cannot wrap player back onto board", () => {
   const game = playing();
   const lane = game.lanes.find(lane => lane.row === 3);
   lane.phase = 450 % lane.period;
-  place(game, 3, 466);
+  place(game, 3, WIDTH - PLAYER_HALF - lane.speed * .2);
   run(game, .4);
   assert.equal(game.lives, 2);
   assert.equal(drainEvents(game).find(e => e.type === "death").reason, "bank");
@@ -208,27 +208,42 @@ test("goal credit is unique and occupied garden costs a heart", () => {
 });
 test("closed garden gaps fail without reward", () => {
   const game = playing();
-  place(game, 1, 16);
+  place(game, 1, 96);
   hop(game, "up");
   assert.equal(game.lives, 2);
   assert.equal(game.score, 0);
 });
 test("edge-case setup: carried off-grid landings use the whole visible garden, not a hidden inset", () => {
   for (const col of GOALS) {
-    for (const offset of [-15.9, -13, 13, 15.9]) {
+    for (const offset of [-GOAL_WIDTH / 2, -24, 24, GOAL_WIDTH / 2 - .01]) {
       const game = playing();
       place(game, 1, (col + .5) * CELL + offset);
       hop(game, "up");
       assert.equal(game.lives, 3);
       assert.equal(game.goals[GOALS.indexOf(col)], true);
     }
-    for (const x of [col * CELL - .01, (col + 1) * CELL]) {
+    const left = (col + .5) * CELL - GOAL_WIDTH / 2;
+    for (const x of [left - .01, left + GOAL_WIDTH]) {
+      if (x < CELL / 2 || x > WIDTH - CELL / 2) continue;
       const game = playing();
       place(game, 1, x);
       hop(game, "up");
       assert.equal(game.lives, 2, "hedges outside the visible tile remain unsafe");
     }
   }
+});
+test("edge-case setup: final garden remains reachable after a one-second reaction delay at the speed cap", () => {
+  const game = playing();
+  game.round = 6;
+  GOALS.forEach((_, i) => deliver(game, i));
+  const lane = game.lanes.find(lane => lane.row === 1);
+  lane.phase = 160;
+  place(game, 1, (GOALS[2] + .5) * CELL);
+  run(game, 1);
+  assert.equal(game.lives, 3);
+  hop(game, "up");
+  assert.equal(game.goals[2], true);
+  assert.equal(game.lives, 3);
 });
 test("five unique goals complete a round, reset slots and cap speeds", () => {
   const game = playing();

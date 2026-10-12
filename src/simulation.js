@@ -3,6 +3,7 @@ export const COLS = 15;
 export const WIDTH = CELL * COLS;
 export const SPAWN_ROW = 10;
 export const GOALS = [1, 4, 7, 10, 13];
+export const GOAL_WIDTH = CELL * 2;
 export const DEADLINE = 40;
 export const HOP_COOLDOWN = 0.14;
 export const STEP = 1 / 120;
@@ -10,9 +11,9 @@ export const PLAYER_HALF = 10;
 const SUPPORT_EPSILON = 1e-7;
 
 const laneSpecs = [
-  { row: 1, kind: "log", speed: 28, length: 224, gap: 32, offset: 4 },
-  { row: 2, kind: "ferry", speed: -34, length: 240, gap: 32, offset: 24 },
-  { row: 3, kind: "log", speed: 26, length: 224, gap: 32, offset: 14 },
+  { row: 1, kind: "log", speed: 14, length: 224, gap: 32, offset: 4 },
+  { row: 2, kind: "ferry", speed: -16, length: 240, gap: 32, offset: 24 },
+  { row: 3, kind: "log", speed: 12, length: 224, gap: 32, offset: 14 },
   { row: 5, kind: "bug", speed: -43, length: 40, gap: 105, offset: 25 },
   { row: 6, kind: "conflict", speed: 39, length: 59, gap: 125, offset: 65 },
   { row: 8, kind: "bug", speed: -45, length: 42, gap: 123, offset: 5 },
@@ -127,7 +128,10 @@ export function hop(game, direction) {
   game.cooldown = HOP_COOLDOWN;
   game.events.push({ type: "hop" });
   if (row === 0) {
-    const goalIndex = GOALS.indexOf(Math.floor(x / CELL));
+    const goalIndex = GOALS.findIndex(col => {
+      const left = (col + .5) * CELL - GOAL_WIDTH / 2;
+      return x >= left && x < left + GOAL_WIDTH;
+    });
     if (goalIndex < 0 || game.goals[goalIndex]) {
       fail(game, goalIndex < 0 ? "garden" : "occupied");
       return true;

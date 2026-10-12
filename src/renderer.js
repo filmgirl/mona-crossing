@@ -1,4 +1,4 @@
-import { CELL, GOALS, WIDTH, segments } from "./simulation.js";
+import { CELL, GOALS, GOAL_WIDTH, WIDTH, segments } from "./simulation.js";
 
 export const PALETTE = Object.freeze({
   ink: "#34313e", cream: "#fff7df", paper: "#fffdf4", peach: "#ffb7a5",
@@ -157,10 +157,11 @@ function background(ctx) {
     rect(ctx, x + 11, BY + CELL * 7 + 19, 4, 4, P.leaf);
   }
   for (const col of GOALS) {
-    frame(ctx, BX + col * CELL, BY, 32, 32, P.paper);
-    rect(ctx, BX + col * CELL + 4, BY + 4, 24, 21, P.grass);
+    const left = BX + (col + .5) * CELL - GOAL_WIDTH / 2;
+    frame(ctx, left, BY, GOAL_WIDTH, CELL, P.paper);
+    rect(ctx, left + 4, BY + 4, GOAL_WIDTH - 8, 21, P.grass);
     label(ctx, "MAIN", BX + col * CELL + 8, BY + 14, 1);
-    rect(ctx, BX + col * CELL + 13, BY + 25, 6, 7, P.cream);
+    rect(ctx, left + 4, BY + 25, GOAL_WIDTH - 8, 7, P.cream);
   }
   for (const x of [0, 560]) {
     rect(ctx, x, 94, 80, 354, P.cream);
@@ -290,7 +291,8 @@ export function createRenderer(canvas, { reducedMotion = false } = {}) {
       ctx.restore();
       for (const [i, col] of GOALS.entries()) {
         if (game.goals[i]) {
-          rect(ctx, BX + col * CELL + 3, BY + 3, 26, 26, P.lavender);
+          rect(ctx, BX + (col + .5) * CELL - GOAL_WIDTH / 2 + 3, BY + 3,
+            GOAL_WIDTH - 6, CELL - 6, P.lavender);
           mona(ctx, BX + (col + 0.5) * CELL, BY + 16, 0.75);
         }
       }

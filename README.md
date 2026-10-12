@@ -34,8 +34,10 @@ delivery earns 100 plus five per remaining second, and all five earn 500.
 Rounds gradually increase entity speeds, capped after round seven. Platform
 lengths, traffic gaps, a safe spawn and safe waiting rows remain unchanged.
 River logs span seven tiles and ferries seven and a half, with one-tile water gaps.
+River currents move at 12–16 pixels per second in round one, about half the
+original pace. Each garden has a two-tile-wide, visibly open landing entrance.
 Keep Mona's feet on a deck; river carry preserves her horizontal position between
-lanes, and her center can land anywhere inside an empty garden's visible tile.
+lanes, and her center can land anywhere inside an empty garden's visible entrance.
 
 ## Development
 
@@ -63,7 +65,7 @@ it never inserts goals, moves Mona programmatically or changes game state.
 Those clock-controlled routes prove reachability, not human timing. River
 regressions also check deck-edge carry, visible garden boundaries, and a minimum
 76-pixel shared landing interval at the worst adjacent-platform alignment
-(over 800 ms of relative travel even at the round-seven speed cap).
+(over 1.6 seconds of relative travel even at the round-seven speed cap).
 `test/browser/river.spec.js` additionally completes a round on the real browser
 clock with WASD decisions spaced 600–800 ms apart on the river and 360–520 ms
 on the road. It observes current geometry

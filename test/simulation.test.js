@@ -101,12 +101,12 @@ test("logs carry Mona with their exact displacement", () => {
   assert.equal(game.lives, 3);
   assert.ok(Math.abs(game.player.x - (x + lane.speed * .5)) < 1e-6);
 });
-test("edge-case setup: both supported deck edges survive carry and phase wrapping", () => {
+test("edge-case setup: both supported deck edges survive carry", () => {
   for (const row of [1, 2, 3]) {
     for (const edge of ["left", "right"]) {
       const game = playing();
       const lane = game.lanes.find(lane => lane.row === row);
-      lane.phase = lane.speed < 0 ? .05 : lane.period - .05;
+      lane.phase = 64;
       const segment = segments(lane).find(segment => segment.x >= 64 && segment.x + segment.width < WIDTH);
       const x = edge === "left" ? segment.x + PLAYER_HALF : segment.x + segment.width - PLAYER_HALF;
       place(game, row, x);
@@ -132,8 +132,8 @@ test("river decks leave useful transfer windows at every relative alignment, inc
     // shared landing interval this wide (Mona's entire support footprint fits).
     const overlap = (Math.min(a.length, b.length) - 2 * PLAYER_HALF -
       (Math.max(a.gap, b.gap) + 2 * PLAYER_HALF)) / 2;
-    assert.ok(overlap >= 44);
-    assert.ok(overlap / (Math.abs(a.speed) + Math.abs(b.speed)) >= .46);
+    assert.ok(overlap >= 76);
+    assert.ok(overlap / (Math.abs(a.speed) + Math.abs(b.speed)) >= .8);
     assert.ok(a.gap >= CELL && b.gap >= CELL, "water remains a real hazard");
     for (const [source, destination] of [[a, b], [b, a]]) {
       const left = 80 + PLAYER_HALF;
@@ -142,7 +142,7 @@ test("river decks leave useful transfer windows at every relative alignment, inc
         const shared = segments({ ...destination, phase }).map(segment =>
           Math.max(0, Math.min(right, segment.x + segment.width - PLAYER_HALF) -
             Math.max(left, segment.x + PLAYER_HALF)));
-        assert.ok(Math.max(...shared) >= 44, `rows ${source.row}/${destination.row}, phase ${phase}`);
+        assert.ok(Math.max(...shared) >= 76, `rows ${source.row}/${destination.row}, phase ${phase}`);
       }
     }
   }

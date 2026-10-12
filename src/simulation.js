@@ -10,9 +10,9 @@ export const PLAYER_HALF = 10;
 const SUPPORT_EPSILON = 1e-7;
 
 const laneSpecs = [
-  { row: 1, kind: "log", speed: 28, length: 160, gap: 32, offset: 4 },
-  { row: 2, kind: "ferry", speed: -34, length: 176, gap: 32, offset: 24 },
-  { row: 3, kind: "log", speed: 26, length: 160, gap: 32, offset: 14 },
+  { row: 1, kind: "log", speed: 28, length: 224, gap: 32, offset: 4 },
+  { row: 2, kind: "ferry", speed: -34, length: 240, gap: 32, offset: 24 },
+  { row: 3, kind: "log", speed: 26, length: 224, gap: 32, offset: 14 },
   { row: 5, kind: "bug", speed: -43, length: 40, gap: 105, offset: 25 },
   { row: 6, kind: "conflict", speed: 39, length: 59, gap: 125, offset: 65 },
   { row: 8, kind: "bug", speed: -45, length: 42, gap: 123, offset: 5 },

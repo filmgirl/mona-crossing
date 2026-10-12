@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { segments, GOALS, CELL, PLAYER_HALF, WIDTH } from "../../src/simulation.js";
 
 // A reactive observer, not a route search: read the current board, choose one
-// ordinary input, then allow 360-520 ms of real wall time for the next decision.
+// ordinary input, then allow 600-800 ms between river decisions.
 function safe(game, row, x, margin = 12) {
   if (x < 20 || x > WIDTH - 20) return false;
   const lane = game.lanes.find(lane => lane.row === row);
@@ -56,7 +56,7 @@ test("real-clock WASD delivers five gardens with human-paced river decisions", a
     }
     if (move) await page.keyboard.press({ up: "w", down: "s", left: "a", right: "d" }[move]);
     previous = { row, x, move };
-    await page.waitForTimeout([360, 440, 520, 400, 480][i % 5]);
+    await page.waitForTimeout(row <= 4 ? [600, 700, 800][i % 3] : [360, 440, 520, 400, 480][i % 5]);
   }
   expect(final.round).toBe(2);
   expect([...delivered].sort()).toEqual([0, 1, 2, 3, 4]);
